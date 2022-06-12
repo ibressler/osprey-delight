@@ -8,3 +8,4 @@ workspace
 # /resources/*
 
 .env
+.DS_Store
