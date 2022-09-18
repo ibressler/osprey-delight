@@ -8,7 +8,14 @@
     </div>
   {{- end }}
   </div>
-  {{ if (.Site.Params.copyright) -}}
+  <div class="row center-xs pages">
+  {{ range where .Site.RegularPages "Params.footerlink" true -}}
+      <small>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </small>
+  {{- end }}
+  </div>
+  {{ if .Site.Params.copyright -}}
   <div class="row center-xs">
     <div class="col-xs">
       <small>
