@@ -12,15 +12,18 @@
   <div class="row center-xs">
     <div class="col-xs">
       <small>
-      {{ if .Site.Params.copyright }}
+      <small>
+      {{ if .Site.Params.copyright -}}
         {{ i18n "copyright" }} &copy; {{ now.Format "2006" }} {{ .Site.Title }}
-      {{ end }}
-      {{ if or (.Site.Params.credit) (eq (isset .Site.Params "credit") false) -}}
-      <div class="col-xs">
-          <small>Theme: <a href="https://github.com/kdevo/osprey-delight" target="_blank" rel="noopener">Osprey Delight</a></small>
-      </div>
+      {{- end -}}
+      {{ if and (.Site.Params.copyright) (or (.Site.Params.credit) (eq (isset .Site.Params "credit") false)) -}}
+      ,
       {{- end }}
+      {{ if or (.Site.Params.credit) (eq (isset .Site.Params "credit") false) -}}
+      Theme: <a href="https://github.com/kdevo/osprey-delight" target="_blank" rel="noopener">Osprey Delight</a>
       </small>
+      </small>
+      {{- end }}
     </div>
   </div>
   {{- end }}
