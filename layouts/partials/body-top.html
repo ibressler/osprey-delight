@@ -41,6 +41,18 @@
       <h3><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}</a></h3>
     </div>
   {{ end }}
+  <!-- language selector -->
+  {{ $thisurl := .Permalink | relURL }}
+  <div class="col-xs-3 col-sm-2 nav-item" id="language">
+    {{ range $.Site.Home.AllTranslations }}
+      {{ if ne $.Site.Language.Lang .Language.Lang }}
+        {{ $from := printf "/%s/" $.Site.Language.Lang }}
+        {{ $to   := printf "/%s/" .Language.Lang }}
+        <h3><a href="{{ replace $thisurl $from $to | absURL }}" style="font-size:66%">{{ .Language }}</a></h3>
+      {{ end }}
+    {{ end }}
+  </div>
+
   <div class="col-xs-6 col-sm-1 nav-toggle" style="{{ if not .IsHome -}} visibility: visible; {{- end }}">
       <a href="" class="nav-icon" onclick="return false">
         {{ partial "icon" "menu" }}
