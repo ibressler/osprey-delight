@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}" class="no-js">
+<html{{ with site.LanguageCode | default site.Language.Lang }} lang="{{ . }}"{{ end }} class="no-js">
   {{ partial "head.html" . }}
   <body>
     {{ partial "body-top" . }}
