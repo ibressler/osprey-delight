@@ -24,11 +24,12 @@
 
           <!-- Content -->
           <article class="entry-content">
+            {{ $ghdescr := ($scratch.Get "repo").description | replaceRE "https?://[^\\s]+" "<a href=\"${0}\" target=_blank>${0}</a>" | emojify }}
             {{ if eq (len (trim .Content "\r\n" )) 0 -}}
-              <p>{{ with $scratch.Get "repo" }}{{ .description | emojify }}{{ end }}</p>
+              <p>{{ with $scratch.Get "repo" }}{{ $ghdescr }}{{ end }}</p>
             {{- else -}}
               {{ if $scratch.Get "repo" }}
-                {{ replace .Content "{github-description}" ($scratch.Get "repo").description | emojify | safeHTML }}
+                {{ replace .Content "{github-description}" $ghdescr | safeHTML }}
               {{- else -}}
                 {{ .Content }}
               {{- end }}
