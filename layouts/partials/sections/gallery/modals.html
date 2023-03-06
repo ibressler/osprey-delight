@@ -59,7 +59,7 @@
             {{ if (default true .Params.github.showButtons) }}
               {{ with $scratch.Get "repo" -}}
                 <div class="col-xs">
-                  <a href="{{ replace (replace .archive_url "{/ref}" "") "{archive_format}" "zipball" }}" target="_blank">
+                  <a href="{{ printf "%s%s%s" "https://github.com/" .full_name "/releases/latest" }}" target="_blank">
                     <button type="submit">{{ partial "icon" "download" }} {{ i18n "download" }}</button>
                   </a>
                 </div>
