@@ -1,6 +1,6 @@
 {{ range where site.RegularPages "Section" "gallery" }}
 
-  {{ $modalID := .File.BaseFileName }}
+  {{ $modalID := .File.TranslationBaseName }}
 
   {{ $scratch := newScratch }}
   {{ if .Params.github.repo -}}

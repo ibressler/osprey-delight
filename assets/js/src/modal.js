@@ -28,9 +28,9 @@
     {{ range where .Site.RegularPages "Section" "gallery" }}
     {{ if .Params.terminal -}}
       {{ if .Params.terminal.options -}}
-        termOptions["{{ .File.BaseFileName }}"] = JSON.parse('{{ .Params.terminal.options | jsonify }}')
+        termOptions["{{ .File.TranslationBaseName }}"] = JSON.parse('{{ .Params.terminal.options | jsonify }}')
       {{- else -}}
-        termOptions["{{ .File.BaseFileName }}"] = {}
+        termOptions["{{ .File.TranslationBaseName }}"] = {}
       {{- end }}
     {{- end }}
     {{- end }}
@@ -77,18 +77,24 @@
 
   // Open modal on link click
   $$('.gallery-modal-link').forEach((link) => {
+    function getLinkID(url) {
+      const parts = url.split('#')
+      return parts[parts.length-1]
+    }
     link.onclick = (e) => {
-      e.preventDefault()  // omit auto scroll to anchor link 
-      id = e.target.getAttribute('href').substr(1)
-      history.pushState({modal: id}, "", `#${id}`)
+      e.preventDefault()  // omit auto scroll to anchor link
+      id = getLinkID(e.target.getAttribute('href'))
+      const url = e.target.getAttribute('href')
+      history.pushState({modal: id}, "", `${url}`)
       open($(`#modal-${id}`))
     }
     const loc = window.location.href
-    const seg = loc.substring(loc.lastIndexOf('/') + 1)
-    if (link.getAttribute('href') == seg) {
+    const seg = loc.split('#')
+    linkid = getLinkID(link.getAttribute('href'))
+    if (linkid == seg[seg.length-1]) {
       // TODO(kdevo): Add check if actually arrived at gallery item
       setTimeout(() => {
-        open($(`#modal-${link.getAttribute('href').substr(1)}`))
+        open($(`#modal-${getLinkID(link.getAttribute('href'))}`))
       }, ANIMATION_TIME * 2)
     }
   })

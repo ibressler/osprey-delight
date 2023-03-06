@@ -1,2 +1,2 @@
-{{ $modalID := .File.BaseFileName }}
-<a href="#{{ $modalID }}" class="gallery-modal-link" id="{{ $modalID }}"></a>
+{{ $modalID := .File.TranslationBaseName }}
+<a href="/{{ .File.Lang }}/#{{ $modalID }}" class="gallery-modal-link" id="{{ $modalID }}"></a>
