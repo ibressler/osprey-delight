@@ -26,7 +26,8 @@
           </div>
         </section>
         <br>
-        {{ if .Site.DisqusShortname -}}
+        <!-- .Site.DisqusShortname deprecated in hugo 133, https://discourse.gohugo.io/t/51111 -->
+        {{ if .Site.Config.Services.Disqus.Shortname -}}
         {{ partial "disqus" . }}
         {{- end }}
       </section>
