@@ -26,16 +26,16 @@
     <meta name="description" content="{{ .Summary }}">
   {{- end }}
 
-  {{ if .Site.Params.author -}}
-    <meta name="author" content="{{ .Site.Params.author }}">
+  {{ if site.Params.author.name -}}
+    <meta name="author" content="{{ site.Params.author.name }}">
   {{- end }}
 
   {{ with .Site.Params.Social -}}
     {{ $twitter := index (where . "type" "==" "twitter") 0 }}
     {{ with $twitter }}
       <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:site" content="@{{ default $.Site.Params.author .name }}">
-      <meta name="twitter:creator" content="@{{ default $.Site.Params.author .name }}">
+      <meta name="twitter:site" content="@{{ default site.Params.author.name .name }}">
+      <meta name="twitter:creator" content="@{{ default site.Params.author.name .name }}">
     {{- end }}
   {{ end -}}
 
@@ -80,7 +80,12 @@
     <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}">
   {{- end }}
 
+  {{/* resources.ToCSS was deprecated in 0.128.0 */}}
+  {{ if ge .Site.Hugo.Version "0.128.0" -}}
+  <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "sass/main.scss" . | css.Sass (dict "targetPath" "style.css" "outputStyle" "compressed") | resources.Fingerprint).Permalink }}">
+  {{- else -}}
   <link rel="stylesheet" href="{{ (resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "sass/main.scss" . | resources.ToCSS (dict "targetPath" "style.css" "outputStyle" "compressed") | resources.Fingerprint).Permalink }}">
+  {{- end }}
 
   {{ if .Site.Params.Feat.useStructuredData -}}
     {{ $s := (resources.Get "person.json" | resources.ExecuteAsTemplate "person.json" .).Content }}
@@ -103,9 +108,8 @@
     <!-- End Google Tag Manager -->
   {{ end }}
 
-  {{ if .Site.GoogleAnalytics }}
-    {{ template "_internal/google_analytics_async.html" . }}
+  {{ if .Site.Config.Services.GoogleAnalytics.ID }}
+    {{ template "_internal/google_analytics.html" . }}
   {{ end }}
-
   {{ partial "head-extended.html" . }}
 </head>
