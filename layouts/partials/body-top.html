@@ -23,7 +23,7 @@
 {{ end }}
 
 <nav class="row middle-xs center-xs {{ if not .IsHome -}} nav-fixed nav-shadow {{- end }}">
-  <div class="col-xs-6 col-sm-1 logo" style="{{ if not .IsHome }}visibility: visible;{{- end }}">
+  <div class="col-xs-6 col-sm-1 logo">
     <a href="{{ "#" | relLangURL }}">
       {{ partial "lazyimg" (dict 
         "img" (resources.Get .Site.Params.logoSmall)
@@ -53,7 +53,7 @@
     {{ end }}
   </div>
 
-  <div class="col-xs-6 col-sm-1 nav-toggle" style="{{ if not .IsHome -}} visibility: visible; {{- end }}">
+  <div class="col-xs-6 col-sm-1 nav-toggle">
       <a href="" class="nav-icon" onclick="return false">
         {{ partial "icon" "menu" }}
       </a>
