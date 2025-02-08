@@ -1,7 +1,7 @@
 @media (max-width: $mobile-breakpoint) {
   nav {
-    // Hide menu links between logo and menu icon
-    div:not(:first-child):not(:last-child) {
+    // Hide menu links between logo, language and menu icon
+    div:not(.logo):not(.nav-toggle):not(#language) {
       display: none;
     }
 

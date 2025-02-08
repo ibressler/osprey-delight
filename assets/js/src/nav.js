@@ -1,7 +1,7 @@
 var menuActive = false
 var navFixed = false
 var nav = $('nav')
-    navToggleAndLogo = $$('nav > .logo, nav > .nav-toggle')
+    navToggleAndLogo = $$('nav > .logo, nav > .nav-toggle, #language')
 
 function fixNav(setFixed) {
   if (setFixed) {

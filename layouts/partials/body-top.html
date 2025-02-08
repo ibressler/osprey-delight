@@ -23,7 +23,7 @@
 {{ end }}
 
 <nav class="row middle-xs center-xs {{ if not .IsHome -}} nav-fixed nav-shadow {{- end }}">
-  <div class="col-xs-6 col-sm-1 logo">
+  <div class="col-xs-4 col-sm-1 logo">
     <a href="{{ "#" | relLangURL }}">
       {{ partial "lazyimg" (dict 
         "img" (resources.Get .Site.Params.logoSmall)
@@ -42,8 +42,8 @@
     </div>
   {{ end }}
   <!-- language selector -->
+  <div class="col-xs-4 col-sm-2 nav-item" id="language">
   {{ $thisurl := .Permalink | relURL }}
-  <div class="col-xs-3 col-sm-2 nav-item" id="language">
     {{ range $.Site.Home.AllTranslations }}
       {{ if ne $.Site.Language.Lang .Language.Lang }}
         {{ $from := printf "/%s/" $.Site.Language.Lang }}
@@ -53,7 +53,7 @@
     {{ end }}
   </div>
 
-  <div class="col-xs-6 col-sm-1 nav-toggle">
+  <div class="col-xs-4 col-sm-0 nav-toggle">
       <a href="" class="nav-icon" onclick="return false">
         {{ partial "icon" "menu" }}
       </a>
