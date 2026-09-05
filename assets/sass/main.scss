@@ -40,7 +40,7 @@ h3 {
 }
 
 {{ if .Site.Params.Feat.useTermynal -}}
-$term_title: "{{ .Site.Data.terminal.title }}";
+$term_title: "{{ hugo.Data.terminal.title }}";
 @import "termynal";
 .term-content {
   max-height: calc(80vh - 20vh);
