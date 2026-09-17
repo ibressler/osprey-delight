@@ -13,6 +13,7 @@
 
   {{ $scripts = $scripts | append (resources.Get "js/src/nav.js" | resources.ExecuteAsTemplate "js/src/nav.js" .) }}
   {{ $scripts = $scripts | append (resources.Get "js/src/home.js") }}
+  {{ $scripts = $scripts | append (resources.Get "js/src/langswitch.js") }}
 
   {{ if (.Site.Params.Feat.ajaxBasin) -}}
     {{ $scripts = $scripts | append (resources.Get "js/src/contact.js" | resources.ExecuteAsTemplate "js/src/contact.js" .) }}
